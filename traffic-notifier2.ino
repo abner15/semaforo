@@ -162,8 +162,10 @@ bool saveConfig() {
 bool checkGoogleMaps() {
   Serial.println("Getting traffic for " + origin + " to " + destination);
     String responseString = api.distanceMatrix(origin, destination, departureTime, trafficModel);
+    String responseString2 = api.distanceMatrix(origin2, destination2, departureTime, trafficModel);
     DynamicJsonBuffer jsonBuffer;
     JsonObject& response = jsonBuffer.parseObject(responseString);
+    JsonObject& response = jsonBuffer.parseObject(responseString2);
     if (response.success()) {
       if (response.containsKey("rows")) {
         JsonObject& element = response["rows"][0]["elements"][0];
