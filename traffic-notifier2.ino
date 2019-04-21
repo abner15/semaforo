@@ -165,21 +165,31 @@ bool checkGoogleMaps() {
     String responseString2 = api.distanceMatrix(origin2, destination2, departureTime, trafficModel);
     DynamicJsonBuffer jsonBuffer;
     JsonObject& response = jsonBuffer.parseObject(responseString);
-    JsonObject& response = jsonBuffer.parseObject(responseString2);
-    if (response.success()) {
-      if (response.containsKey("rows")) {
+    JsonObject& response2 = jsonBuffer.parseObject(responseString2);
+    if (response.success and response2.success()) {
+      if (response.containsKey("rows") and response2.containsKey("rows")) {
         JsonObject& element = response["rows"][0]["elements"][0];
+        JsonObject& element2 = response2["rows"][0]["elements"][0];
         String status = element["status"];
-        if(status == "OK") {
+        String status = element2["status"];
+        if(status and status2 == "OK") {
 
           durationInTraffic = element["duration_in_traffic"]["text"].as<String>();
+          durationInTraffic2 = element2["duration_in_traffic"]["text"].as<String>();
 
           int durationInSeconds = element["duration"]["value"];
           int durationInTrafficInSeconds = element["duration_in_traffic"]["value"];
           int difference = durationInSeconds - durationInTrafficInSeconds;
+          int durationInSeconds2 = element2["duration"]["value"];
+          int durationInTrafficInSeconds2 = element2["duration_in_traffic"]["value"];
+          int difference2 = durationInSeconds2 - durationInTrafficInSeconds2;
           differenceInMinutes = difference/60;
           percentageDifference = (difference * 100.0) / durationInSeconds;
           Serial.println("Duration In Traffic: " + durationInTraffic + "(" + durationInTrafficInSeconds + ")");
+          differenceInMinutes2 = difference2/60;
+          percentageDifference2 = (difference2 * 100.0) / durationInSeconds2;
+          Serial.println("Duration In Traffic: " + durationInTraffic + "(" + durationInTrafficInSeconds + ")");
+          
           return true;
 
         }
