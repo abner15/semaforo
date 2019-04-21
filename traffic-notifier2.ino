@@ -23,7 +23,6 @@
 // Availalbe on library manager (UniversalTelegramBot)
 // https://github.com/witnessmenow/Universal-Arduino-Telegram-Bot
 
-#include <SH1106Wire.h>
 #include <OLEDDisplayFonts.h>
 // For comunicating with the OLED screen
 // Available on the library manager (esp8266-oled-ssd1306)
